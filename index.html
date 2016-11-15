@@ -1,11 +1,36 @@
 <html>
 <head></head>
 <title>Metlife Account Linking</title>
+<script>
+  function login(){
+    console.log('login');
+    var http = new XMLHttpRequest();
+    var url = 'https://qa.phoenix.ead.metlife.com/edge/services/public/channel/loginInteractionServices/loginservice';
+    var params = 'sysId=&serviceName=validateUser&userName=claimpnc3@ml.com&password=metlife1&newUserName=&newPassword=';
+    //http.setRequestHeader('','');
+    http.open("POST", url, false);
+    
+    http.setRequestHeader('Accept-Encoding','*');
+    http.setRequestHeader('API-Version','1');
+    http.setRequestHeader('Authorization','Basic Y2xhaW1wbmMzQG1sLmNvbTptZXRsaWZlMQ==');
+    http.setRequestHeader('Accept','application/json');
+    http.setRequestHeader('Content-Type','application/json');
+
+    http.send(params);
+
+    http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+            alert('all done');
+            console.log(http.responseText);
+        }
+    }
+  }
+</script>
 <body style="width:100%;height:100%">
   <div style="width:70%; margin:0 auto; padding-top:10%">
     <h1 style="text-align:center">Metlife Account Linking</h1>
     <input type="text" id="username" style="margin-top: 7%; height:5%; width:100%;" placeholder="User Name"></input>
     <input type="password" id="password" style="margin-top: 7%; height:5%; width:100%;" placeholder="Password"></input>
-    <button id="submit" style="margin-top: 7%; height:5%; width:100%;">SUBMIT</button>
+    <button id="submit" style="margin-top: 7%; height:5%; width:100%;" onclick="login()">SUBMIT</button>
   </div>
 </body>
