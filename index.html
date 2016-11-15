@@ -10,7 +10,8 @@
     //http.setRequestHeader('','');
     http.open("POST", url, false);
 
-    //http.setRequestHeader('Accept-Encoding','*');
+    http.setRequestHeader('Accept','*/*');
+    http.setRequestHeader('Access-Control-Request-Headers','accept, content-type');
     http.setRequestHeader('API-Version','1');
     http.setRequestHeader('Authorization','Basic Y2xhaW1wbmMzQG1sLmNvbTptZXRsaWZlMQ==');
     http.setRequestHeader('Accept','application/json');
