@@ -42,7 +42,7 @@
     pairs.redirect_uri = decodeURIComponent(pairs.redirect_uri);
     if(pairs.account_linking_token){
       //facebook linking
-      var facebookSpecificRedirectUrl = pairs.redirect_uri + '?account_linking_token=' + airs.account_linking_token + '&authorization_code=' + 'MY_CUSTOM_AUTHORIZATION';
+      var facebookSpecificRedirectUrl = pairs.redirect_uri + '?account_linking_token=' + pairs.account_linking_token + '&authorization_code=' + 'MY_CUSTOM_AUTHORIZATION';
       console.log(facebookSpecificRedirectUrl);
       window.location.href = facebookSpecificRedirectUrl;
     }else{
