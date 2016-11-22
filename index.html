@@ -1,7 +1,5 @@
 <html>
-<head>
-  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.3.min.js"></script>
-</head>
+<head></head>
 <title>Metlife Account Linking</title>
 <script>
   function login(){
@@ -42,11 +40,18 @@
       userName = 'testvikram';
     }
     pairs.redirect_uri = decodeURIComponent(pairs.redirect_uri);
+    if(pairs.account_linking_token){
+      //facebook linking
+      var facebookSpecificRedirectUrl = pairs.redirect_uri + '?account_linking_token=' + airs.account_linking_token + '&authorization_code=' + 'MY_CUSTOM_AUTHORIZATION';
+      console.log(facebookSpecificRedirectUrl);
+      window.location.href = facebookSpecificRedirectUrl;
+    }else{
+      var amazonSpecificRedirectUrl = pairs.redirect_uri + '#state=' + pairs.state + '&access_token=' + userName + '&token_type=Bearer';
+      console.log(amazonSpecificRedirectUrl);
+      window.location.href = amazonSpecificRedirectUrl;
+    }
 
-    var amazonSpecificRedirectUrl = pairs.redirect_uri + '#state=' + pairs.state + '&access_token=' + userName + '&token_type=Bearer';
-    console.log(amazonSpecificRedirectUrl);
 
-    window.location.href = amazonSpecificRedirectUrl;
   }
 </script>
 <body style="width:100%;height:100%">
