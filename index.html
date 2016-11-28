@@ -44,11 +44,30 @@
       //facebook linking
       var facebookSpecificRedirectUrl = pairs.redirect_uri + '&authorization_code=' + 'MY_CUSTOM_AUTHORIZATION';
       console.log(facebookSpecificRedirectUrl);
+      //alert(facebookSpecificRedirectUrl)
       window.location.href = facebookSpecificRedirectUrl;
     }else{
+      var http = new XMLHttpRequest();
+      var loginUrl = 'http://172.16.33.232:8080/chatbot/rest/login';
+      var params = {"userName":"testuser","password":"testpassword"};
+      var dummyResponse = {"status":"success","statusCode":"01","response":{"authToken":"930c5686e3e65a03519c2a826beabe0aa6ec3ed5"}};
+      http.open("POST", url, false);
+      http.setRequestHeader('Content-Type','application/json');
+      http.send(params);
+
+      http.onreadystatechange = function() {
+          if(http.readyState == 4 && http.status == 200) {
+              alert('all done');
+              console.log(http.responseText);
+          }else{
+            console.log('error')
+            console.log(http.responseText)
+          }
+      }
+
       var amazonSpecificRedirectUrl = pairs.redirect_uri + '#state=' + pairs.state + '&access_token=' + userName + '&token_type=Bearer';
       console.log(amazonSpecificRedirectUrl);
-      window.location.href = amazonSpecificRedirectUrl;
+      //window.location.href = amazonSpecificRedirectUrl;
     }
 
 
