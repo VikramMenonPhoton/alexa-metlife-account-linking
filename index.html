@@ -35,8 +35,9 @@
     var pairs = parseUrl();
     console.log('available pairs')
     console.log(pairs)
-    var userName, passWord;
-    if(document.getElementById("username").value && document.getElementById("password").value){
+    var userName = document.getElementById("username").value,
+        passWord = document.getElementById("password").value;
+    if(userName && passWord){
       //userName = 'claimpnc3@ml.com';
       //passWord = 'metlife1';
     }else{
