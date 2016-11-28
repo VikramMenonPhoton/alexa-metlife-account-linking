@@ -49,7 +49,6 @@
             var serviceObj = JSON.parse(xmlhttp.responseText);
             if(serviceObj.status === 'success'){
               var token = serviceObj.response.key;
-              alert('Login success, can i redirect?');
               if(pairs && pairs.account_linking_token){
                 facebookRedirect(pairs, token);
               }else{
