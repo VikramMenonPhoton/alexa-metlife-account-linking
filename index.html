@@ -3,16 +3,14 @@
 <title>Metlife Account Linking</title>
 <script>
 
-  function amazonRedirect(token){
+  function amazonRedirect(pairs, token){
     var amazonSpecificRedirectUrl = pairs.redirect_uri + '#state=' + pairs.state + '&access_token=' + token + '&token_type=Bearer';
     console.log(amazonSpecificRedirectUrl);
-    alert(token);
     window.location.href = amazonSpecificRedirectUrl;
   }
 
-  function facebookRedirect(token){
+  function facebookRedirect(pairs, token){
     var facebookSpecificRedirectUrl = pairs.redirect_uri + '&authorization_code=' + token;
-    alert(token);
     console.log(facebookSpecificRedirectUrl);
     window.location.href = facebookSpecificRedirectUrl;
   }
@@ -26,15 +24,11 @@
       pairs[pair[0]] = pair[1];
     }
     pairs.redirect_uri = decodeURIComponent(pairs.redirect_uri);
-    console.log('parseUrl function');
-    console.log(pairs)
     return pairs;
   }
 
   function login(){
     var pairs = parseUrl();
-    console.log('available pairs')
-    console.log(pairs)
     var userName = document.getElementById("username").value,
         passWord = document.getElementById("password").value;
     if(userName && passWord){
@@ -56,10 +50,10 @@
             if(serviceObj.status === 'success'){
               var token = serviceObj.response.key;
               alert('Login success, can i redirect?');
-              if(pairs.account_linking_token){
-                facebookRedirect(token);
+              if(pairs && pairs.account_linking_token){
+                facebookRedirect(pairs, token);
               }else{
-                amazonRedirect(token);
+                amazonRedirect(pairs, token);
               }
             }
         }else{
