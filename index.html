@@ -39,13 +39,8 @@
       passWord = 'metlife1'
     }
 
-    if(pairs && !pairs.account_linking_token){
-      amazonRedirect(pairs, 'amazon-dummy-token');
-      return;
-    }
-
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
-    var loginUrl = 'http://172.16.33.173:8080/chatbot/rest/login';
+    var loginUrl = 'https://03076-qa.photoninfotech.com/chatbot/rest/login';
     xmlhttp.open("POST", loginUrl);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var params = {"userName":userName,"passWord":passWord};
