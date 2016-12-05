@@ -4,10 +4,10 @@
 <script>
 
   function randomString() {
-    var length = 10;
+    var length = 20;
     var text = "";
-    //var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    var possible = "0123456789";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    //var possible = "0123456789";
     for(var i = 0; i < length; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
@@ -39,8 +39,14 @@
   }
 
   function login(){
-    var uniqueKey = randomString();
+
+    var uniqueKey;
     var pairs = parseUrl();
+    if(pairs.senderID){
+      uniqueKey = pairs.senderID;
+    }else{
+      uniqueKey = randomString();
+    }
     var userName = document.getElementById("username").value,
         passWord = document.getElementById("password").value;
     if(userName && passWord){
