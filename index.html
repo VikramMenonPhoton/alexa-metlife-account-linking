@@ -3,6 +3,16 @@
 <title>Metlife Account Linking</title>
 <script>
 
+  function randomString() {
+    var length = 20;
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for(var i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+  }
+
   function amazonRedirect(pairs, token){
     var amazonSpecificRedirectUrl = pairs.redirect_uri + '#state=' + pairs.state + '&access_token=' + token + '&token_type=Bearer';
     console.log(amazonSpecificRedirectUrl);
@@ -28,6 +38,7 @@
   }
 
   function login(){
+    var uniqueKey = randomString();
     var pairs = parseUrl();
     var userName = document.getElementById("username").value,
         passWord = document.getElementById("password").value;
@@ -40,7 +51,7 @@
     }
 
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
-    var loginUrl = 'https://03076-qa.photoninfotech.com/chatbot/rest/login';
+    var loginUrl = 'https://instance01.dev.sl.metlife.com/metlifepoc/adapters/chatbotadapter/rest/login';
     xmlhttp.open("POST", loginUrl);
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     var params = {"userName":userName,"passWord":passWord};
